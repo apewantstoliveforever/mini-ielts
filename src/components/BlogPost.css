@@ -1,0 +1,22 @@
+/* BlogPost.css */
+
+article {
+    margin: 20px 0; /* Khoảng cách trên và dưới mỗi bài viết */
+    padding: 20px;
+    border: 1px solid #ddd; /* Đường viền xung quanh bài viết */
+    background-color: #fff; /* Màu nền của bài viết */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Đổ bóng bài viết */
+  }
+  
+  h2 {
+    font-size: 20px; /* Kích thước tiêu đề bài viết */
+    margin: 0 0 10px; /* Loại bỏ khoảng cách bên dưới tiêu đề */
+  }
+  
+  p {
+    font-size: 16px; /* Kích thước nội dung bài viết */
+    line-height: 1.5; /* Khoảng cách dòng của nội dung */
+  }
+  
+  /* Tuỳ chỉnh màu sắc, độ rộng, font chữ và các thuộc tính khác tùy theo yêu cầu của bạn. */
+  

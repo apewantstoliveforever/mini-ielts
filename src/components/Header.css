@@ -1,0 +1,35 @@
+/* Header.css */
+header {
+    background-color: #333; /* Màu nền của header */
+    color: #fff; /* Màu chữ của header */
+    padding: 20px; /* Khoảng cách bên trong header */
+  }
+  
+  h1 {
+    margin: 0; /* Loại bỏ khoảng cách trên và dưới của tiêu đề h1 */
+  }
+  
+  nav ul {
+    list-style: none; /* Loại bỏ dấu chấm trước danh sách */
+    padding: 0;
+    display: flex;
+  }
+  
+  nav ul li {
+    margin-right: 20px; /* Khoảng cách giữa các mục trong danh sách */
+  }
+  
+  nav ul li:last-child {
+    margin-right: 0; /* Loại bỏ khoảng cách bên phải của mục cuối cùng */
+  }
+  
+  nav a {
+    text-decoration: none; /* Loại bỏ gạch chân từ các liên kết */
+    color: #fff; /* Màu chữ của liên kết */
+    font-weight: bold; /* In đậm văn bản của liên kết */
+  }
+  
+  nav a:hover {
+    text-decoration: underline; /* Gạch chân liên kết khi di chuột qua */
+  }
+  

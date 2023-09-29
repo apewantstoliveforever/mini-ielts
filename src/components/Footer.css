@@ -1,0 +1,20 @@
+/* Footer.css */
+footer {
+    background-color: #333; /* Màu nền của footer */
+    color: #fff; /* Màu chữ của footer */
+    padding: 20px; /* Khoảng cách bên trong footer */
+    text-align: center; /* Căn giữa văn bản */
+  }
+  
+  /* Định dạng chữ trong footer */
+  p {
+    margin: 0; /* Loại bỏ khoảng cách trên và dưới của đoạn văn bản */
+    font-size: 14px; /* Kích thước chữ */
+  }
+  
+  /* Định dạng dấu bản quyền */
+  .copyright {
+    font-size: 12px;
+    opacity: 0.7; /* Độ mờ của dấu bản quyền */
+  }
+  
