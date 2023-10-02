@@ -1,3 +1,3 @@
-const api = 'https://api-blog.apewannaliveforever.online/';
+const api = 'https://api-blog.apewannaliveforever.online';
 
 export default api;
