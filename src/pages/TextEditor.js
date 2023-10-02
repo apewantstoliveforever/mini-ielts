@@ -4,8 +4,8 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import SyntaxHighlighter from "react-syntax-highlighter"; // Import SyntaxHighlighter
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs"; // Import a code highlighting style
-
-const apiUrl = "http://localhost:3002/posts";
+import api from "../api/api";
+const apiUrl = `${api}/posts`;
 
 function TextEditor() {
   const [title, setTitle] = useState("");
