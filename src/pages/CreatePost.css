@@ -50,3 +50,17 @@
 .create-page form button:hover {
   background-color: #ddd;
 }
+
+
+
+/* CSS cho trình soạn thảo văn bản */
+.react-quill-container {
+  max-width: 800px; /* Điều chỉnh chiều rộng tối đa của trình soạn thảo */
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow-x: auto; /* Cho phép cuộn ngang khi nội dung vượt quá kích thước tối đa */
+}

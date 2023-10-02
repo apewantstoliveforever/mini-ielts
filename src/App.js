@@ -15,9 +15,9 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" exact element={<Home />} />
-          <Route path="/blog" element={<Blog />} />
           <Route path="/about" element={<About />} />
           <Route path="/create" element={<CreatePost />} />
+          <Route path="/blog/:id" element={<Blog />} />
         </Routes>
         <Footer />
       </div>

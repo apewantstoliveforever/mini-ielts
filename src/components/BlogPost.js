@@ -1,11 +1,14 @@
 import React from 'react';
 import './BlogPost.css'; // Nhúng tệp CSS của bạn vào đây
+import Result from './Result'
 
-function BlogPost({ title, content }) {
+function BlogPost({ title, content, id }) {
   return (
-    <article>
-      <h2>{title}</h2>
-      <p>{content}</p>
+    <article className='article'>
+      <h2 className='title'>{title}</h2>
+      <div className="result">
+        <Result content={content} id={id} />
+      </div>
     </article>
   );
 }

@@ -1,32 +1,28 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'; // Import useParams
 import BlogPost from '../components/BlogPost';
 import './Blog.css';
-import axios from 'axios'; // Import Axios
-import Result from './Result';
+import axios from 'axios';
+import api from '../api/api';
 
 function Blog() {
-  const [blogPosts, setBlogPosts] = useState([]); // State to hold the fetched blog posts
-
+  const { id } = useParams(); // Get the 'id' parameter from the URL
+  const [blogPost, setBlogPost] = useState({}); // State to hold the fetched blog post
+  const api_url = api
   useEffect(() => {
     // Inside useEffect to fetch data when the component mounts
-    axios.get('http://localhost:3002/posts') // Replace with the actual API URL
+    axios.get(`${api_url}/posts/${id}`)
       .then((response) => {
-        setBlogPosts(response.data); // Set the fetched data in the state
+        setBlogPost(response.data); // Set the fetched data in the state
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-  }, []); // Empty dependency array to run the effect only once
+  }, [id]); // Include 'id' in the dependency array to re-run the effect when 'id' changes
 
   return (
     <div className="blog-page">
-      <h2>Blog</h2>
-      {blogPosts.map((post, index) => (
-        <BlogPost key={index} title={post.title} content={post.content} />
-      ))}
-      <div className="result">
-        <Result />
-      </div>
+      <BlogPost title={blogPost.title} content={blogPost.content} id={blogPost.id} />
     </div>
   );
 }

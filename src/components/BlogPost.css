@@ -1,12 +1,67 @@
-/* BlogPost.css */
+
+/* Style for images within the content */
+.blog-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Style for tables */
+table {
+  border-collapse: collapse;
+  border: 1px solid black;
+  border-spacing: 0;
+  margin: 0 auto;
+}
+
+table td,
+table th {
+  border: 1px solid black;
+  padding: 10px; /* Adjust the padding as needed */
+}
+
+/* Style for blockquotes */
+blockquote {
+  margin-left: 20px; /* Adjust the margin as needed */
+  padding: 0 15px;
+  border-left: 5px solid #ccc;
+}
+
 
 article {
-    margin: 20px 0; /* Khoảng cách trên và dưới mỗi bài viết */
-    padding: 20px;
-    border: 1px solid #ddd; /* Đường viền xung quanh bài viết */
-    background-color: #fff; /* Màu nền của bài viết */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Đổ bóng bài viết */
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
   }
+  
+.title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.result {
+  max-width: 90%;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 0 auto;
+
+
+}
+img {
+  max-width: 100%;
+  height: auto;
+  margin: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
   
   h2 {
     font-size: 20px; /* Kích thước tiêu đề bài viết */
@@ -20,3 +75,91 @@ article {
   
   /* Tuỳ chỉnh màu sắc, độ rộng, font chữ và các thuộc tính khác tùy theo yêu cầu của bạn. */
   
+/* CSS cho code block */
+.ql-syntax {
+  background-color: #f4f4f4; /* Màu nền của code block */
+  border: 1px solid #ccc; /* Viền xung quanh code block */
+  padding: 10px; /* Khoảng cách bên trong code block */
+  margin: 10px 0; /* Khoảng cách trên và dưới code block */
+  white-space: pre-wrap; /* Đảm bảo văn bản bên trong code block không bị tràn ra ngoài */
+  font-family: 'Courier New', monospace; /* Kiểu font chữ cho code block */
+  font-size: 14px; /* Kích thước font chữ cho code block */
+}
+
+/* Để canh trái nội dung */
+.ql-align-left {
+  text-align: left;
+}
+
+/* Để canh giữa nội dung */
+.ql-align-center {
+  text-align: center;
+}
+
+/* Để canh phải nội dung */
+.ql-align-right {
+  text-align: right;
+}
+
+/* Dropdown chọn màu */
+.ql-color {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  width: 30px; /* Điều chỉnh kích thước dropdown chọn màu tùy ý */
+  height: 30px; /* Điều chỉnh kích thước dropdown chọn màu tùy ý */
+  margin-right: 5px; /* Điều chỉnh khoảng cách giữa dropdown chọn màu và nội dung văn bản tùy ý */
+  cursor: pointer;
+}
+
+/* Màu mặc định cho dropdown chọn màu */
+.ql-color .ql-picker-label {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Màu mặc định khi đã chọn màu */
+.ql-color .ql-picker-options {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Tùy chỉnh màu cho các mục trong dropdown */
+.ql-color .ql-picker-options .ql-picker-item {
+  padding: 2px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover màu trong dropdown */
+.ql-color .ql-picker-options .ql-picker-item:hover {
+  background-color: #f5f5f5;
+}
+
+/* Dropdown chọn kích thước văn bản (.ql-size) */
+.ql-size {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+
+
+.ql-size-small {
+  font-size: 10px;
+}
+
+.ql-size-normal {
+  font-size: 13px;
+}
+
+.ql-size-large {
+  font-size: 18px;
+}
+
+.ql-size-huge {
+  font-size: 32px;
+}

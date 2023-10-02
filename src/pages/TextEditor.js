@@ -1,32 +1,59 @@
 import React, { useState } from "react";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { Table, TableToolbar } from '@ckeditor/ckeditor5-table';
 import axios from "axios";
-const apiUrl = 'http://localhost:3002/posts'; // Điều chỉnh URL của bạn tại đây
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import SyntaxHighlighter from "react-syntax-highlighter"; // Import SyntaxHighlighter
+import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs"; // Import a code highlighting style
 
+const apiUrl = "http://localhost:3002/posts";
 
 function TextEditor() {
-  const [title, setTitle] = useState(""); // State for the title
-  const [textEditor, setTextEditor] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
 
     const data = {
-      title: title, // Add the title to the data object
-      content: textEditor,
+      title: title,
+      content: content,
     };
 
     axios
       .post(apiUrl, data)
       .then(() => {
-        // Clear the title and textEditor fields after successful submission
         setTitle("");
-        setTextEditor("");
+        setContent("");
       })
       .catch((err) => console.log(err));
   }
+
+  const modules = {
+    toolbar: [
+      [{ header: "1" }, { header: "2" }, { font: ['9','10','11','12','13','16','20','30'] }, { size: [] }, {color: []}],
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ align: '' }, { align: 'center' }, { align: 'right' }, { align: 'justify' }],
+      ["bold", "italic", "underline"],
+      ["link", "image"],
+      ["clean"],
+      ["code-block"], // Add the code block button
+    ],
+  };
+
+  const formats = [
+    "header",
+    "font",
+    "size",
+    "list",
+    "bold",
+    "italic",
+    "underline",
+    'align',
+    "link",
+    "image",
+    "code-block", // Add the code block format
+    "color"
+  ];
 
   return (
     <form onSubmit={handleSubmit}>
@@ -40,17 +67,20 @@ function TextEditor() {
           required
         />
       </div>
-      <CKEditor
-        editor={ClassicEditor}
-        data={textEditor}
-        onReady={(editor) => {
-          // You can store the "editor" and use it when needed.
-        }}
-        onChange={(event, editor) => {
-          const data = editor.getData();
-          setTextEditor(data);
-        }}
-        plugins={[Table, TableToolbar]}
+      <ReactQuill
+        className="react-quill-container" // Thêm lớp CSS mới vào đây
+        value={content}
+        onChange={setContent}
+        modules={modules}
+        formats={formats}
+        placeholder="Write something..."
+        // Custom renderer for code block
+        // This renderer uses SyntaxHighlighter to highlight code
+        renderCustomComponent={(props) => (
+          <SyntaxHighlighter language="javascript" style={docco}>
+            {props.children}
+          </SyntaxHighlighter>
+        )}
       />
       <button type="submit">Submit</button>
     </form>
