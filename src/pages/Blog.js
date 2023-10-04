@@ -4,6 +4,7 @@ import BlogPost from '../components/BlogPost';
 import './Blog.css';
 import axios from 'axios';
 import api from '../api/api';
+import Chapter from '../components/Chapter/Chapter';
 
 function Blog() {
   const { id } = useParams(); // Get the 'id' parameter from the URL
@@ -22,7 +23,10 @@ function Blog() {
 
   return (
     <div className="blog-page">
-      <BlogPost title={blogPost.title} content={blogPost.content} id={blogPost.id} />
+      {
+        // <BlogPost title={blogPost.title} content={blogPost.content} id={blogPost.id} />
+      }
+      <Chapter />
     </div>
   );
 }
