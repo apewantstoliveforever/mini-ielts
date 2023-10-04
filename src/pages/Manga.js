@@ -10,7 +10,7 @@ const Manga = () => {
 
     // get data from api
     useEffect(() => {
-        axios.get(`http://localhost:3002/manga/${id}`)
+        axios.get(`https://api-blog.apewannaliveforever.online/manga/${id}`)
             .then((response) => {
                 const { data } = response;
                 setChapters(data);

@@ -13,7 +13,7 @@ function Home() {
 
   // Function to fetch manga items for a specific page
   function getPosts(pageNumber) {
-    axios.get(`http://localhost:3002/manga/all/${pageNumber}`)
+    axios.get(`https://api-blog.apewannaliveforever.online/manga/all/${pageNumber}`)
       .then((response) => {
         const { data } = response;
         setPosts(data.mangas);

@@ -7,7 +7,7 @@ const Chapter = () => {
     const { chapter} = useParams();
     const [content, setContent] = useState(""); // State to hold the fetched blog post
     useEffect(() => {
-        axios.get(`http://localhost:3002/manga/chapter/${chapter}`)
+        axios.get(`https://api-blog.apewannaliveforever.online/manga/chapter/${chapter}`)
             .then((response) => {
                 const { data } = response;
                 setContent(data.chapter_content);
