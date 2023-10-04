@@ -5,13 +5,13 @@
     align-items: center;
   }
 /* Home.css */
-.post-list {
+.manga-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start; /* Canh giữa mỗi hàng và căn cách giữa các mục */
   }
   
-  .post-item {
+  .manga-item {
     width: calc(25% - 20px); /* Chiều rộng của mỗi mục (25% của container và trừ 10px để tạo khoảng cách) */
     margin-bottom: 20px; /* Khoảng cách giữa các mục */
     margin-right: 20px;
