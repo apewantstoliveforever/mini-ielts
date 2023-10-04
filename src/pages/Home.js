@@ -40,7 +40,7 @@ function Home() {
         {posts.map((item, index) => (
           <div className='manga-item' key={index} onClick={() => navigate(`/manga/${item.manga_id}`)}>
             <div className='post-img'>
-              <img src='https://picsum.photos/200/300' alt='Ảnh bài viết' />
+              <img src='item.manga_image' alt='Ảnh bài viết' />
             </div>
             <p>{item.manga_name}</p>
           </div>
