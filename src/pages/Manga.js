@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
+import './Manga.css';
 
 const Manga = () => {
     //get params
@@ -25,7 +26,7 @@ const Manga = () => {
 
 
     return (
-<div>
+<div className='manga-page'>
   Manga
   <div>
     {chapters.map((item, index) => (

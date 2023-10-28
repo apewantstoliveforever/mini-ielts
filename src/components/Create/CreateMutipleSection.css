@@ -1,0 +1,82 @@
+/* CreateMutipleSection.css */
+
+.create-section {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: cornsilk;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.create-section h3 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.create-section label {
+    display: block;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.create-section input[type="text"] {
+    width: 90%;
+    padding: 5px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.create-section .text-editor {
+    margin: 5px 0;
+}
+
+.create-section button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.create-section button:hover {
+    background-color: #0056b3;
+}
+
+.create-section select {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.create-section div {
+    margin: 10px 0;
+}
+
+.create-section>div {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.create-section>div:last-child {
+    border-bottom: none;
+}
+
+/* CreateMutipleSection.css */
+.remove-button button {
+    background-color: red;
+    color: white; /* Text color for better visibility */
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  /* Optionally, you can style the button when hovered over */
+  .remove-button:hover button {
+    background-color: darkred;
+  }
+  

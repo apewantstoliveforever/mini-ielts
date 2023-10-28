@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './CreatePost.css'; // Import your CSS file here
-import TextEditor from './TextEditor';
+import TextEditor from '../components/TextEditor/TextEditor';
 import axios from 'axios';
 import api from '../api/api';
 

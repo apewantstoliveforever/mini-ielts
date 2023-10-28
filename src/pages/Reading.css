@@ -1,0 +1,80 @@
+/* Reading.css */
+
+/* Container */
+.reading-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    padding: 20px;
+}
+
+/* Left Content */
+.left-content {
+    flex: 1;
+    /* Take up 50% of the available width */
+    padding: 10px;
+}
+
+/* Right Content */
+.right-content {
+    flex: 1;
+    /* Take up 50% of the available width */
+    padding: 10px;
+}
+
+/* Title */
+.reading-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #0077b6;
+}
+
+/* Section */
+.section-number {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Question Number */
+.question-number {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Button */
+.check-answer-button {
+    background-color: #0077b6;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Results */
+.question-results {
+    margin-top: 20px;
+}
+
+/* Score */
+.score {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0077b6;
+}
+
+.create-section-button,
+.create-post-button {
+    display: inline-block;
+    margin-left: 10px;
+    /* Add some margin between the buttons if needed */
+}

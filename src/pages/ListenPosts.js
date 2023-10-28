@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import './Home.css';
+import './ListenPosts.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/api';
 
-function Home() {
+function ListenPosts() {
   const api_url = api;
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1); // Current page
@@ -13,7 +13,7 @@ function Home() {
 
   // Function to fetch manga items for a specific page
   function getPosts(pageNumber) {
-    axios.get(`${api_url}/posts/page/${pageNumber}`)
+    axios.get(`${api_url}/posts/listening/${pageNumber}`)
       .then((response) => {
         const { posts, totalPages } = response.data; // Response data should be accessed as response.data
         setPosts(posts);
@@ -69,4 +69,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default ListenPosts;

@@ -1,0 +1,66 @@
+/* Create.css */
+
+.create-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .create-form {
+    margin-bottom: 20px;
+  }
+  
+  .create-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    /* Set a specific width for the labels, e.g., 100px */
+    width: 100px;
+  }
+  
+  .create-form select,
+  .create-form input[type="text"] {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .create-form .text-editor {
+    /* Add styles for the text editor here */
+  }
+  
+  .create-section {
+    margin: 10px 0;
+  }
+  
+  .create-section select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .create-section-button,
+  .create-post-button {
+      display: inline-block;
+      background-color: #007BFF; /* Button background color */
+      color: #fff; /* Text color */
+      padding: 10px 20px; /* Padding around the button text */
+      border: none; /* Remove the default button border */
+      border-radius: 5px; /* Add rounded corners */
+      margin: 10px 5px; /* Spacing around the buttons */
+      cursor: pointer; /* Show a pointer cursor on hover */
+  }
+  
+  .create-section-button:hover,
+  .create-post-button:hover {
+      background-color: #0056b3; /* Button background color on hover */
+  }
+  
