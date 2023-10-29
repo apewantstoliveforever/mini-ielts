@@ -12,6 +12,7 @@
   }
   
   .manga-item {
+    min-width: 25vw - 20px;
     width: calc(25% - 20px); /* Chiều rộng của mỗi mục (25% của container và trừ 10px để tạo khoảng cách) */
     margin-bottom: 20px; /* Khoảng cách giữa các mục */
     margin-right: 20px;

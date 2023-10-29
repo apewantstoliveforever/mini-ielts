@@ -58,8 +58,8 @@ const Create = () => {
                 return <CreateMutipleSection updateSection={updateSection} index={index} />;
             case 'blank':
                 return <CreateBlankSection updateSection={updateSection} index={index} />;
-            case 'select':
-                return <CreateSelectSection updateSection={updateSection} index={index} />;
+            //case 'select':
+                //return <CreateSelectSection updateSection={updateSection} index={index} />;
             default:
                 return null;
         }
@@ -241,7 +241,7 @@ const Create = () => {
                 >
                     <option value="multiple">Multiple Section</option>
                     <option value="blank">Blank Section</option>
-                    <option value="select">Select Section</option>
+                    {/* <option value="select">Select Section</option> */}
                 </select>
                 <button className="create-section-button" onClick={addSection}>Add Section</button>
             </div>

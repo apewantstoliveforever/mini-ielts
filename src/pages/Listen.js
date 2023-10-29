@@ -87,26 +87,15 @@ const Reading = () => {
         <h1 className="reading-title">{post.post_title}</h1>
         {
           post.listening_link ? (
-            <div className="centered-iframe">
-              <iframe  // Add the centered-iframe class
-                width="800" height="450" src={youtubeParser(post.listening_link)}>
-              </iframe>
-            </div>
-          ) :
-            null
-        }
-        {
-          post.audio_file_url ? (
             <div className="centered-audio">
               <audio controls>
-                <source src={post.audio_file_url} type="audio/mpeg" />
+                <source src={`https://silent-pig-63.telebit.io/${post.listening_link}`} type="audio/mpeg" />
                 Your browser does not support the audio element.
               </audio>
             </div>
           ) :
             null
         }
-
       </div>
       <div className='right-content'>
         {post.sections && post.sections.map((section, sectionIndex) => (
