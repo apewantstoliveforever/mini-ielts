@@ -5,22 +5,35 @@ import axios from 'axios';
 import api from '../api/api';
 
 function CreatePost() {
-    const api_url = api
-    const [image, setImage] = useState('');
+    const api_url = 'http://localhost:3002';
+    const [audio, setAudio] = useState('');
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState('');
 
-    const uploadImage = async (e) => {
-        const files = e.target.files;
-        const data = new FormData();
-        data.append('file', files[0]);
-        data.append('upload_preset', 'uploadimage');
-        setLoading(true);
-        axios.post(`${api_url}/posts/uploadImage`, data).then((res) => {
-            setImage(res.data.secure_url);
-            setLoading(false);
-            console.log(res.data.secure_url);
-        });
+    const uploadAudio = async (e) => {
+        const file = e.target.files[0];
+
+        if (file) {
+            // Check if the selected file is an audio file
+            if (file.type.startsWith('audio/')) {
+                // Check if the file size is less than 10 MB
+                if (file.size <= 10 * 1024 * 1024) {
+                    const data = new FormData();
+                    data.append('file', file);
+                    setLoading(true);
+
+                    axios.post(`${api_url}/posts/uploadAudio`, data).then((res) => {
+                        setAudio(res.data.secure_url);
+                        setLoading(false);
+                        console.log(res.data.secure_url);
+                    });
+                } else {
+                    alert('File size should be less than 10 MB.');
+                }
+            } else {
+                alert('Please select an audio file.');
+            }
+        }
     };
 
     return (
@@ -29,29 +42,36 @@ function CreatePost() {
             <div className="upload">
                 <input
                     type="file"
+                    accept="audio/*" // Accept only audio files
                     name="file"
-                    placeholder="Upload an image"
-                    onChange={uploadImage}
+                    placeholder="Upload an audio file"
+                    onChange={uploadAudio}
                 />
                 {loading ? (
                     <h3>Loading...</h3>
                 ) : (
-                    <img src={image} style={{ width: '300px' }} alt="Uploaded" />
+                    <audio controls>
+                        <source src={audio} type="audio/mp3" />
+                        Your browser does not support the audio element.
+                    </audio>
                 )}
                 <div>
                     <button
                         onClick={(e) => {
                             e.preventDefault();
-                            setResult(image);
+                            setResult(audio);
                         }}
                     >
                         Upload
                     </button>
                 </div>
                 <div className="result">
-                    <img src={result} style={{ width: '300px' }} alt="Result" />
+                    <audio controls>
+                        <source src={result} type="audio/mp3" />
+                        Your browser does not support the audio element.
+                    </audio>
                 </div>
-                <div className='text-editor'>
+                <div className="text-editor">
                     <TextEditor />
                 </div>
             </div>

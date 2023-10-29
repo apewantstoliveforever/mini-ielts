@@ -4,7 +4,7 @@ import './Header.css'; // Nhúng tệp CSS của bạn vào đây
 function Header() {
   return (
     <header>
-      <h1>My Personal Blog</h1>
+      <h1>Mini Toeic</h1>
       <nav>
         <ul>
           <li><a href="/">Home</a></li>

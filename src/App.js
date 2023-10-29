@@ -15,6 +15,7 @@ import Create from './pages/Create';
 import Reading from './pages/Reading';
 import ListenPosts from './pages/ListenPosts';
 import ReadPosts from './pages/ReadPosts';
+import './App.css';
 function App() {
   return (
     <Router>

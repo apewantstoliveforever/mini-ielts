@@ -26,6 +26,21 @@ const Reading = () => {
         return fragments
     }
 
+    const a = "<p><span style=\"color: rgb(26, 26, 26);\">You may think you can’t live without your tablet computer and your cordless electric drill, but what about the inventions that came before them? Humans have been innovating since the dawn of time to get us to where we are today. Here are just 10 of the hundreds of inventions that profoundly changed your world. What else would be on your list?</span></p>"
+
+    const removeTagP = (text) => {
+        const modifiedA = text.replace(/<p>/g, "<span>");
+        return modifiedA;
+    }
+    //const removeTagP = (text) => {
+    //const modifiedA = text.replace(/<p>(.*?)<\/p>/g, '<span>$1</span>');
+    //return modifiedA;
+    //}
+
+    console.log(removeTagP(a));
+
+
+
     const handleBlankInput = (e) => {
         const questionNumber = e.target.getAttribute('number');
         setSelectedAnswers({
@@ -98,7 +113,7 @@ const Reading = () => {
     return (
         <div className="reading-container">
             <div className='left-content'>
-                <h1 className="reading-title">{post.post_title}</h1>
+                <h1 className="post-title">{post.post_title}</h1>
                 <div dangerouslySetInnerHTML={{ __html: post.reading_text }}></div>
             </div>
             <div className='right-content'>
@@ -107,16 +122,24 @@ const Reading = () => {
                         <div key={sectionIndex}>
                             {section.section_type === 'blank' ? (
                                 <div>
-                                    {replaceUWithInput(section.section_detail, currentQuestion).map((fragment, fragmentIndex) => (
-                                        <span key={fragmentIndex}>
-                                            {fragment === 'this-is-blank-space' ? (
-                                                <input number={currentQuestion++} type="text" onChange={handleBlankInput}/>
-                                            ) : (
-                                                <span dangerouslySetInnerHTML={{ __html: fragment }}></span>
-                                            )}
-                                        </span>
-                                    )
-                                    )}
+                                    <div className='section-number'>
+                                        SECTION {section.section_number}
+                                    </div>
+                                    <div className='section-title'>
+                                        {section.section_title}
+                                    </div>
+                                    <div>
+                                        {replaceUWithInput(removeTagP(section.section_detail), currentQuestion).map((fragment, fragmentIndex) => (
+                                            <span key={fragmentIndex}>
+                                                {fragment === 'this-is-blank-space' ? (
+                                                    <input number={currentQuestion} type="text" onChange={handleBlankInput} placeholder={currentQuestion++} />
+                                                ) : (
+                                                    <span dangerouslySetInnerHTML={{ __html: fragment }}></span>
+                                                )}
+                                            </span>
+                                        )
+                                        )}
+                                    </div>
                                 </div>
                             ) : (
                                 <div>

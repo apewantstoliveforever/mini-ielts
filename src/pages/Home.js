@@ -24,6 +24,16 @@ function Home() {
       });
   }
 
+  function extractImageSrcFromHTML(htmlContent) {
+    const tempElement = document.createElement('div');
+    tempElement.innerHTML = htmlContent;
+
+    const imgElement = tempElement.querySelector('img');
+    const src = imgElement ? imgElement.getAttribute('src') : "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png";
+
+    return src;
+  }
+
   useEffect(() => {
     getPosts(page);
   }, [page]);
@@ -34,22 +44,7 @@ function Home() {
 
   return (
     <div className='home-page'>
-      <h2>Welcome to My Personal Blogs</h2>
-      <p>This is the home page.</p>
-      <div className='manga-list'>
-        {posts.length > 0 ? (
-          posts.map((item, index) => (
-            <div className='manga-item' key={index} onClick={() => navigate(`/${item.post_type === 'reading' ? 'reading' : 'listen'}/${item.post_id}`)}>
-              <div className='post-img'>
-                <img src={"http://www.todayifoundout.com/wp-content/uploads/2014/01/salt3.jpg"} alt='Ảnh bài viết' />
-              </div>
-              <p>{item.post_title}</p>
-            </div>
-          ))
-        ) : (
-          <p>No posts available.</p>
-        )}
-      </div>
+      <h2>Welcome to Mini-Toeic</h2>
       <div className="pagination">
         <button
           onClick={() => handlePageChange(page - 1)}
@@ -64,6 +59,20 @@ function Home() {
         >
           Next
         </button>
+      </div>
+      <div className='manga-list'>
+        {posts.length > 0 ? (
+          posts.map((item, index) => (
+            <div className='manga-item' key={index} onClick={() => navigate(`/${item.post_type === 'reading' ? 'reading' : 'listen'}/${item.post_id}`)}>
+              <div className='post-img'>
+                <img src={extractImageSrcFromHTML(item.reading_text)} alt='Ảnh bài viết' />
+              </div>
+              <p>{item.post_title}</p>
+            </div>
+          ))
+        ) : (
+          <p>No posts available.</p>
+        )}
       </div>
     </div>
   );

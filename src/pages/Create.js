@@ -6,6 +6,27 @@ import CreateBlankSection from '../components/Create/CreateBlankSection';
 import TextEditor from '../components/TextEditor/TextEditor';
 import api from '../api/api';
 import './Create.css'; // Import the CSS file
+import { useNavigate, Link } from 'react-router-dom';
+
+
+
+const NotificationMessage = ({ message, onDismiss }) => {
+    const refreshPage = () => {
+        window.location.reload();
+    };
+
+    return (
+        <div className="notification-message">
+            <div className="notification-content">{message}</div>
+            <div className="notification-actions">
+                <Link to="/" className="navigation-link">
+                    <button>Go to Home Page</button>
+                </Link>
+                <button onClick={refreshPage}>Create New Post</button>
+            </div>
+        </div>
+    );
+};
 
 const Create = () => {
     const [postTitle, setPostTitle] = useState('');
@@ -15,11 +36,20 @@ const Create = () => {
     const [sections, setSections] = useState([]);
     const [sectionType, setSectionType] = useState('multiple'); // Add state for sectionType
 
+    const [showNotification, setShowNotification] = useState(false);
+    const [notificationMessage, setNotificationMessage] = useState('');
+
+    const [audio, setAudio] = useState('');
+
+
+
     const [image, setImage] = useState('');
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState('');
 
     const api_url = api;
+    const navigate = useNavigate(); // Use navigate to redirect
+
 
     const renderSectionForm = ({ index, key, section }) => {
         const sectionType = section.section_type;
@@ -27,9 +57,9 @@ const Create = () => {
             case 'multiple':
                 return <CreateMutipleSection updateSection={updateSection} index={index} />;
             case 'blank':
-                return <CreateBlankSection updateSection={updateSection}  index={index} />;
+                return <CreateBlankSection updateSection={updateSection} index={index} />;
             case 'select':
-                return <CreateSelectSection updateSection={updateSection}  index={index} />;
+                return <CreateSelectSection updateSection={updateSection} index={index} />;
             default:
                 return null;
         }
@@ -39,23 +69,95 @@ const Create = () => {
         setReadingText(value);
     }
 
+    const uploadAudio = async (e) => {
+        const file = e.target.files[0];
+
+        if (file) {
+            // Check if the selected file is an audio file
+            if (file.type.startsWith('audio/')) {
+                // Check if the file size is less than 10 MB
+                if (file.size <= 10 * 1024 * 1024) {
+                    setAudio(file)
+                };
+            } else {
+                alert('File size should be less than 10 MB.');
+            }
+        } else {
+            alert('Please select an audio file.');
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const dataSend = {
-                post_title: postTitle,
-                post_type: postType,
-                reading_text: readingText,
-                listening_link: listeningLink,
-                post_sections: sections,
-            };
+            if (postType === 'listen') {
+                if (audio === '') {
+                    alert('Please select an audio file.');
+                } else {
+                    const data = new FormData();
+                    data.append('file', audio);
+                    const jsonData = {
+                        key1: 'value1',
+                        key2: 'value2'
+                        // Add your JSON data here
+                    };
+                    // Add JSON data to FormData
+                    data.append('post_title', postTitle);
 
-            const response = await axios.post(`${api_url}/posts`, dataSend);
-            console.log(dataSend);
+                    axios({
+                        method: 'POST',
+                        url: `${api_url}/posts/uploadAudio`,
+                        data: data, // Attach the FormData object
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                        },
+                    }).then(async (res) => {
+                        //neu status 200 thi upload thanh cong
+                        console.log(res.status);                    
+                        setListeningLink(res.data.linkId);
+                        if (res.status === 200) {
+                            const dataSend = {
+                                post_title: postTitle,
+                                post_type: postType,
+                                reading_text: readingText,
+                                listening_link: res.data.linkId,
+                                post_sections: sections,
+                            };
+                            const response = await axios.post(`${api_url}/posts`, dataSend);
+                        }
+                    }).catch((error) => {
+                        console.error('Error:', error);
+                    });
+                }
+
+
+            }
+
+            else {
+                const dataSend = {
+                    post_title: postTitle,
+                    post_type: postType,
+                    reading_text: readingText,
+                    listening_link: listeningLink,
+                    post_sections: sections,
+                };
+
+                const response = await axios.post(`${api_url}/posts`, dataSend);
+                console.log(dataSend);
+            }
+
+            // Post creation successful
+            setNotificationMessage('Post created successfully!');
+            setShowNotification(true);
         } catch (error) {
             console.error('Error creating post:', error);
+
+            // Post creation failed
+            setNotificationMessage('Error creating post. Please try again.');
+            setShowNotification(true);
         }
     };
+
 
     const addSection = () => {
         const newSection = {
@@ -113,7 +215,13 @@ const Create = () => {
                         {postType === 'listen' && (
                             <div>
                                 <label>Listening Link:</label>
-                                <input type="text" value={listeningLink} onChange={(e) => setListeningLink(e.target.value)} />
+                                <input
+                                    type="file"
+                                    accept="audio/*" // Accept only audio files
+                                    name="file"
+                                    placeholder="Upload an audio file"
+                                    onChange={uploadAudio}
+                                />
                             </div>
                         )}
                     </form>
@@ -138,6 +246,12 @@ const Create = () => {
                 <button className="create-section-button" onClick={addSection}>Add Section</button>
             </div>
             <button onClick={handleSubmit} className="create-post-button">Create Post</button>
+            {showNotification && (
+                <NotificationMessage
+                    message={notificationMessage}
+                    onDismiss={() => setShowNotification(false)}
+                />
+            )}
         </div>
     );
 }

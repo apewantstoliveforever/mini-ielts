@@ -6,28 +6,32 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
     padding: 20px;
+    min-height: 100vh;
 }
 
 /* Left Content */
 .left-content {
-    flex: 1;
-    /* Take up 50% of the available width */
+    flex: 1; /* Take up 50% of the available width */
     padding: 10px;
+}
+
+.left-content span {
+    color: #0077b6;
 }
 
 /* Right Content */
 .right-content {
-    flex: 1;
-    /* Take up 50% of the available width */
+    flex: 1; /* Take up 50% of the available width */
     padding: 10px;
 }
 
 /* Title */
-.reading-title {
+.post-title {
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 20px;
     color: #0077b6;
+    text-align: center;
 }
 
 /* Section */
@@ -72,9 +76,9 @@
     color: #0077b6;
 }
 
+/* Buttons (Create and Post) */
 .create-section-button,
 .create-post-button {
     display: inline-block;
-    margin-left: 10px;
-    /* Add some margin between the buttons if needed */
+    margin-left: 10px; /* Add some margin between the buttons if needed */
 }

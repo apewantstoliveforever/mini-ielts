@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Question from '../components/Question';
 import './Listen.css';
+import api from '../api/api';
 
 const Reading = () => {
   const { id } = useParams();
@@ -12,11 +13,13 @@ const Reading = () => {
   const [results, setResults] = useState([]);
   const [score, setScore] = useState(0);
 
+  const api_url = api;
+
   let currentQuestion = 1;
 
   // Get data from API
   useEffect(() => {
-    axios.get(`http://localhost:3002/posts/${id}`)
+    axios.get(`${api_url}/posts/${id}`)
       .then((response) => {
         const { data } = response;
         setPost(data);
@@ -88,6 +91,17 @@ const Reading = () => {
               <iframe  // Add the centered-iframe class
                 width="800" height="450" src={youtubeParser(post.listening_link)}>
               </iframe>
+            </div>
+          ) :
+            null
+        }
+        {
+          post.audio_file_url ? (
+            <div className="centered-audio">
+              <audio controls>
+                <source src={post.audio_file_url} type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
             </div>
           ) :
             null
