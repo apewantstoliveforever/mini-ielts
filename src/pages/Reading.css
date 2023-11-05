@@ -117,6 +117,18 @@
         /* Include padding in the width calculation */
     }
 
+    .left-content {
+        .ql-syntax {
+            font-size: 14px;
+            max-width: 100%;
+            /* Adjust font size for small screens */
+            box-sizing: border-box;
+            /*text wrap*/
+            white-space: pre-wrap;
+            text-align: justify;
+        }
+    }
+    
     /* Title */
     .post-title {
         font-size: 24px;

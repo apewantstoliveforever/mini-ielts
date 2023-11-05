@@ -41,4 +41,24 @@
     font-size: 14px;
     margin: 0;
   }
-  
+
+/* Định dạng cho màn hình có chiều rộng dưới 768px (điện thoại di động) */
+@media (max-width: 768px) {
+  .home-page {
+    align-items: flex-start; /* Các phần tử sẽ căn trên cùng */
+  }
+
+  .manga-list {
+    flex-direction: row; /* Hiển thị các mục cùng một hàng */
+    flex-wrap: wrap; /* Cho phép các mục xuống dòng nếu không đủ chỗ */
+    justify-content: space-between; /* Canh đều giữa các mục */
+  }
+
+  .manga-item {
+    min-width: calc(50% - 20px); /* Mỗi mục chiếm 50% chiều rộng và trừ đi khoảng cách */
+    width: calc(50% - 20px); /* Mỗi mục chiếm 50% chiều rộng và trừ đi khoảng cách */
+    margin-right: 0; /* Không có khoảng cách giữa các mục */
+    margin-bottom: 10px; /* Khoảng cách giữa các hàng */
+  }
+}
+
