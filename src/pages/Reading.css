@@ -111,7 +111,7 @@
     .right-content {
         flex: 1;
         /* Take up 100% of the available width for small screens */
-        max-width: 90%;
+        max-width: 100%;
         /* Ensure the content doesn't exceed the screen width */
         box-sizing: border-box;
         /* Include padding in the width calculation */
