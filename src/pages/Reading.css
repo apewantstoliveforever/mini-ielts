@@ -7,11 +7,13 @@
     grid-gap: 20px;
     padding: 20px;
     min-height: 100vh;
+    min-width: 100vw;
 }
 
 /* Left Content */
 .left-content {
-    flex: 1; /* Take up 50% of the available width */
+    flex: 1;
+    /* Take up 50% of the available width */
     padding: 10px;
 }
 
@@ -21,7 +23,8 @@
 
 /* Right Content */
 .right-content {
-    flex: 1; /* Take up 50% of the available width */
+    flex: 1;
+    /* Take up 50% of the available width */
     padding: 10px;
 }
 
@@ -80,5 +83,90 @@
 .create-section-button,
 .create-post-button {
     display: inline-block;
-    margin-left: 10px; /* Add some margin between the buttons if needed */
+    margin-left: 10px;
+    /* Add some margin between the buttons if needed */
+}
+
+/* Media Query for Mobile */
+@media (max-width: 768px) {
+    .reading-container {
+        display: flex;
+        /* Change the display to flex for small screens */
+        flex-direction: column;
+        /* Change the direction to column for small screens */
+        /* Reduce the padding for small screens */
+        max-width: 100vw;
+        /* Ensure the content doesn't exceed the screen width */
+        box-sizing: border-box;
+        /* Include padding in the width calculation */
+    }
+
+    img {
+        width: 90%;
+        /* Adjust image width to 100% for small screens */
+    }
+
+    /* Left Content */
+    .left-content,
+    .right-content {
+        flex: 1;
+        /* Take up 100% of the available width for small screens */
+        max-width: 90%;
+        /* Ensure the content doesn't exceed the screen width */
+        box-sizing: border-box;
+        /* Include padding in the width calculation */
+    }
+
+    /* Title */
+    .post-title {
+        font-size: 24px;
+        /* Reduce the font size for small screens */
+        margin-bottom: 10px;
+    }
+
+    /* Section */
+    .section-number {
+        font-size: 24px;
+        /* Adjust font size for small screens */
+        margin-top: 10px;
+    }
+
+    .section-title {
+        font-size: 16px;
+        /* Adjust font size for small screens */
+        margin-top: 5px;
+    }
+
+    /* Question Number */
+    .question-number {
+        font-size: 14px;
+        /* Adjust font size for small screens */
+        margin-top: 5px;
+    }
+
+    /* Button */
+    .check-answer-button {
+        padding: 8px 16px;
+        /* Reduce button padding for small screens */
+    }
+
+    /* Results */
+    .question-results {
+        margin-top: 10px;
+    }
+
+    /* Score */
+    .score {
+        font-size: 16px;
+        /* Adjust font size for small screens */
+    }
+
+    /* Buttons (Create and Post) */
+    .create-section-button,
+    .create-post-button {
+        display: block;
+        /* Change to a block element for small screens */
+        margin: 10px 0;
+        /* Add margin above and below the buttons for small screens */
+    }
 }
