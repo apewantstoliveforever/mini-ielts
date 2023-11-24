@@ -22,13 +22,16 @@ function Header() {
           {isLoggedIn && (
             <li><a href="/profile">Profile</a></li>
           )}
+          {isLoggedIn && (
+            <li><a href="/create">Create</a></li>
+
+          )}
           <li><a href="/listening">Listen</a></li>
           <li><a href="/reading">Reading</a></li>
-          <li><a href="/create">Create</a></li>
           {isLoggedIn ? (
             <li><a href="/login" onClick={handleLogout}>Logout</a></li>
           ) : (
-            <li><a href="/logf">Login</a></li>
+            <li><a href="/login">Login</a></li>
           )}
         </ul>
       </nav>
