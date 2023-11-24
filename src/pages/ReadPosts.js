@@ -44,8 +44,7 @@ function ReadPosts() {
 
   return (
     <div className='home-page'>
-      <h2>Welcome to My Personal Blogs</h2>
-      <p>This is the home page.</p>
+      <h2>Welcome to My Reading Posts</h2>
       <div className="pagination">
         <button
           onClick={() => handlePageChange(page - 1)}

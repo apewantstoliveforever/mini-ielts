@@ -6,7 +6,12 @@ import CreateBlankSection from '../components/Create/CreateBlankSection';
 import TextEditor from '../components/TextEditor/TextEditor';
 import api from '../api/api';
 import './Create.css'; // Import the CSS file
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import UserService from "../services/user.service"
+
+
 
 
 
@@ -29,6 +34,7 @@ const NotificationMessage = ({ message, onDismiss }) => {
 };
 
 const Create = () => {
+
     const [postTitle, setPostTitle] = useState('');
     const [postType, setPostType] = useState('listen');
     const [readingText, setReadingText] = useState('');
@@ -38,17 +44,20 @@ const Create = () => {
 
     const [showNotification, setShowNotification] = useState(false);
     const [notificationMessage, setNotificationMessage] = useState('');
-
     const [audio, setAudio] = useState('');
-
-
 
     const [image, setImage] = useState('');
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState('');
-
     const api_url = api;
     const navigate = useNavigate(); // Use navigate to redirect
+
+    const { user: currentUser } = useSelector((state) => state.auth);
+
+    if (!currentUser) {
+        return <Navigate to="/login" />;
+    }
+
 
 
     const renderSectionForm = ({ index, key, section }) => {
@@ -59,7 +68,7 @@ const Create = () => {
             case 'blank':
                 return <CreateBlankSection updateSection={updateSection} index={index} />;
             //case 'select':
-                //return <CreateSelectSection updateSection={updateSection} index={index} />;
+            //return <CreateSelectSection updateSection={updateSection} index={index} />;
             default:
                 return null;
         }
@@ -113,7 +122,7 @@ const Create = () => {
                         },
                     }).then(async (res) => {
                         //neu status 200 thi upload thanh cong
-                        console.log(res.status);                    
+                        console.log(res.status);
                         setListeningLink(res.data.linkId);
                         if (res.status === 200) {
                             const dataSend = {
@@ -142,13 +151,24 @@ const Create = () => {
                     post_sections: sections,
                 };
 
-                const response = await axios.post(`${api_url}/posts`, dataSend);
-                console.log(dataSend);
+                // const response = await axios.post(`${api_url}/posts`, dataSend);
+                // console.log(dataSend);
+                UserService.postNewReading(dataSend).then(
+                    (response) => {
+                        console.log(response.data);
+                        setNotificationMessage('Post created successfully!');
+                        setShowNotification(true);
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                );
+
             }
 
-            // Post creation successful
-            setNotificationMessage('Post created successfully!');
-            setShowNotification(true);
+            // // Post creation successful
+            // setNotificationMessage('Post created successfully!');
+            // setShowNotification(true);
         } catch (error) {
             console.error('Error creating post:', error);
 
@@ -185,9 +205,9 @@ const Create = () => {
         setSections(newSections);
     };
 
-    useEffect(() => {
-        console.log(sections);
-    }, [sections]);
+    // useEffect(() => {
+    //     console.log(sections);
+    // }, [sections]);
 
 
     return (

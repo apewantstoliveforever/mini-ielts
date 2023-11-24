@@ -5,7 +5,8 @@ import axios from 'axios';
 import api from '../api/api';
 
 function CreatePost() {
-    const api_url = 'http://localhost:3002';
+
+    //const api_url = 'http://localhost:3002';
     const [audio, setAudio] = useState('');
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState('');
@@ -22,7 +23,7 @@ function CreatePost() {
                     data.append('file', file);
                     setLoading(true);
 
-                    axios.post(`${api_url}/posts/uploadAudio`, data).then((res) => {
+                    axios.post(`${api}/posts/uploadAudio`, data).then((res) => {
                         setAudio(res.data.secure_url);
                         setLoading(false);
                         console.log(res.data.secure_url);

@@ -12,7 +12,9 @@ import Create from './pages/Create';
 import Reading from './pages/Reading';
 import ListenPosts from './pages/ListenPosts';
 import ReadPosts from './pages/ReadPosts';
+import Authenticate from './pages/Authenticate';
 import './App.css';
+import Profile from './pages/Profile';
 function App() {
   return (
     <Router>
@@ -27,6 +29,9 @@ function App() {
           <Route path="/listen/:id" element={<Listen />} />
           <Route path="/listening" element={<ListenPosts />} />
           <Route path="/reading" element={<ReadPosts />} />
+          <Route path="/authenticate" element={<Authenticate />} />
+          <Route path= "/profile" element={<Profile />} />
+          <Route path="/login" element={<Authenticate />} />
         </Routes>
         <Footer />
       </div>
