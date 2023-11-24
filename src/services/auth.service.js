@@ -1,8 +1,8 @@
 import axios from "axios";
 import api from "../api/api";
 
-const register = async (email, password) => {
-      await axios.post(`${api}/loginIeltsRoutes/register`, { email, password });
+const register = async (email, password, displayName, photoURL) => {
+      await axios.post(`${api}/loginIeltsRoutes/register`, { email, password, displayName, photoURL });
   };
   
 

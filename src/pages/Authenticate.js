@@ -33,7 +33,7 @@ const Authenticate = () => {
     };
 
     const handleRegister = async ({ email, password, displayName, photoURL }) => {
-        dispatch(register(email, password))
+        dispatch(register(email, password, displayName, photoURL))
             .then(() => {
                 navigate('/');
             })
