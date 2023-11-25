@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 const CountdownTimer = ({checkTimeout, restartTime, handleRestartTime}) => {
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(5);
+  const [minutes, setMinutes] = useState(5);
+  const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
     const intervalId = setInterval(() => {

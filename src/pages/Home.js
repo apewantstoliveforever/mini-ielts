@@ -44,21 +44,10 @@ function Home() {
 
   return (
     <div className='home-page'>
-      <h2>Welcome to Mini-Toeic</h2>
       <div className="pagination">
-        <button
-          onClick={() => handlePageChange(page - 1)}
-          disabled={page === 1}
-        >
-          Previous
-        </button>
-        <span>Page {page} of {totalPages}</span>
-        <button
-          onClick={() => handlePageChange(page + 1)}
-          disabled={page === totalPages}
-        >
-          Next
-        </button>
+        <button className="pagination-btn" onClick={() => handlePageChange(page - 1)} disabled={page === 1}>Previous</button>
+        <span className="pagination-info">Page {page} of {totalPages}</span>
+        <button className="pagination-btn" onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>Next</button>
       </div>
       <div className='manga-list'>
         {posts.length > 0 ? (

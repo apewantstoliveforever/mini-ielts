@@ -2,20 +2,59 @@
 
 import React, { Component } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
+import './ResultPage.css';
 
 
-const ResultPage = ({}) => {
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+
+const ResultPage = ({ }) => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { results, correctAnswers, score, postLink } = location.state;
+    const { results, correctAnswers, postLink, selectedAnswers } = location.state;
     const handleRestart = () => {
         navigate(postLink);
     };
+    //lengh of selectedAnswers = {}
+    const selectedAnswersLength = Object.keys(selectedAnswers).length
+    console.log("sss", Object.keys(selectedAnswers));
+    const notAnswered = results.length - selectedAnswersLength;
+    //const inCorrectAnswers = results.filter((result) => result === false).length - notAnswered;
+    const score = results.filter((result) => result === true).length;
+    const inCorrectAnswers = results.length - score - notAnswered;
+    console.log(results);
+    console.log('score', score);
+    console.log(inCorrectAnswers);
+    console.log("not answer", notAnswered);
+    console.log(selectedAnswersLength);
+
+    const data = {
+        labels: ['Correct', 'Incorrect', 'Not Answered'],
+        datasets: [
+            {
+                label: '# of Votes',
+                data: [score, inCorrectAnswers, notAnswered],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)',
+                ],
+                borderWidth: 1,
+            },
+        ],
+    };
 
     return (
-        <div>
+        <div className="result-page-container">
             <h1>Result Page</h1>
-            <div>
+            <div className="result-content">
                 <div className="question-results">
                     <ul>
                         {results.map((result, index) => (
@@ -34,6 +73,9 @@ const ResultPage = ({}) => {
 
                 <div className="button-container">
                     <button onClick={handleRestart}>Restart</button>
+                </div>
+                <div className="chart-container">
+                    <Pie data={data} />
                 </div>
             </div>
         </div>

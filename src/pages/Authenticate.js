@@ -8,6 +8,7 @@ import api from '../api/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { login, register } from '../actions/auth';
+import './Authenticate.css';
 
 
 const Authenticate = () => {
@@ -51,7 +52,7 @@ const Authenticate = () => {
       }
 
     return (
-        <div>
+        <div className='AuthenticatePage'>
             <>
                 <LoginForm onLogin={handleLogin} />
                 <RegisterForm onRegister={handleRegister} />

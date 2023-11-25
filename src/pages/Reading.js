@@ -10,6 +10,11 @@ import { useNavigate } from 'react-router-dom';
 const Reading = () => {
     const { id } = useParams();
     const [post, setPost] = useState({});
+    // const [selectedAnswers, setSelectedAnswers] = useState({
+
+
+    // });
+    //create selectedAnswers for every question in post if its not selected or input make it null
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [correctAnswers, setCorrectAnswers] = useState({});
     const [results, setResults] = useState([]);
@@ -119,7 +124,8 @@ const Reading = () => {
 
     const checkAnswer = () => {
         const correctAnswers = getCorrectAnswers();
-
+        console.log("correctAnswers", correctAnswers);
+        console.log("selectedAnswers", selectedAnswers);
         const results = Object.keys(correctAnswers).map((questionNumber) => {
             const correctAnswer = correctAnswers[questionNumber];
             const selectedAnswer = selectedAnswers[questionNumber];
@@ -136,7 +142,7 @@ const Reading = () => {
         // navigate('/result') and give results, correctAnswers, score;
         //save this post link
         const postLink = `/reading/${id}`;
-        navigate(`/result/${id}`, { state: { results, correctAnswers, score, postLink } });
+        navigate(`/result/${id}`, { state: { results, correctAnswers, score, postLink, selectedAnswers } });
     };
 
     const checkTimeout = () => {

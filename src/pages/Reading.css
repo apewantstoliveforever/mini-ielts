@@ -118,6 +118,10 @@
     background-color: #2980b9; /* Darker blue on hover */
 }
 
+img {
+    width: 100%;
+}
+
 
 /* Media Query for Mobile */
 @media (max-width: 768px) {
