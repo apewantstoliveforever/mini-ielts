@@ -15,6 +15,7 @@ import ReadPosts from './pages/ReadPosts';
 import Authenticate from './pages/Authenticate';
 import './App.css';
 import Profile from './pages/Profile';
+import ResultPage from './pages/ResultPage';
 function App() {
   return (
     <Router>
@@ -32,6 +33,7 @@ function App() {
           <Route path="/authenticate" element={<Authenticate />} />
           <Route path= "/profile" element={<Profile />} />
           <Route path="/login" element={<Authenticate />} />
+          <Route path="/result/:id" element={<ResultPage />} />
         </Routes>
         <Footer />
       </div>

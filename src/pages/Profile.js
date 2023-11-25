@@ -16,7 +16,7 @@ const Profile = () => {
     return (
         <div>
             <h3>
-                <strong>{currentUser.email}</strong> Profile
+                <strong>{currentUser.displayName}</strong> Profile
             </h3>
             <p>
                 Profile image

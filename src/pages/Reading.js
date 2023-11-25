@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import Question from '../components/Question';
 import './Reading.css'; // Import the CSS file
 import api from '../api/api';
+import CountdownTimer from '..//components/CountdownTimer/CountdownTimer';
+import { useNavigate } from 'react-router-dom';
 
 const Reading = () => {
     const { id } = useParams();
@@ -13,6 +15,37 @@ const Reading = () => {
     const [results, setResults] = useState([]);
     const [score, setScore] = useState(0);
     const api_url = api;
+    const [showResult, setShowResult] = useState(false);
+    const [restartTime, setRestartTime] = useState(false); // Add this line
+
+    const navigate = useNavigate();
+
+    const handleRestartTime = () => {
+        setRestartTime(!restartTime);
+    }
+
+    const handleRestart = () => {
+        setRestartTime(!restartTime); // Restart countdown timer
+        setSelectedAnswers({}); // Reset selected answers
+        setShowResult(false);
+        setScore(0);
+        setResults([]);
+        resetAllChoose();
+        resetAllBlankInput();
+    }
+
+    const resetAllChoose = () => {
+        const allChoose = document.querySelectorAll('input[type="radio"]');
+        allChoose.forEach((choose) => {
+            choose.checked = false;
+        });
+    }
+    const resetAllBlankInput = () => {
+        const allBlankInput = document.querySelectorAll('input[type="text"]');
+        allBlankInput.forEach((blankInput) => {
+            blankInput.value = '';
+        });
+    }
 
     let currentQuestion = 1;
 
@@ -97,10 +130,19 @@ const Reading = () => {
 
             return isCorrect;
         });
-
+        setShowResult(true);
         setResults(results);
         setScore(results.filter((result) => result).length);
+        // navigate('/result') and give results, correctAnswers, score;
+        //save this post link
+        const postLink = `/reading/${id}`;
+        navigate(`/result/${id}`, { state: { results, correctAnswers, score, postLink } });
     };
+
+    const checkTimeout = () => {
+        checkAnswer();
+    }
+
 
     useEffect(() => {
         console.log(selectedAnswers);
@@ -118,6 +160,7 @@ const Reading = () => {
             </div>
             <div className='right-content'>
                 <div className="right-content">
+                    <CountdownTimer checkTimeout={checkTimeout} restartTime={restartTime} handleRestartTime={handleRestartTime} />
                     {post.sections && post.sections.map((section, sectionIndex) => (
                         <div key={sectionIndex}>
                             {section.section_type === 'blank' ? (
@@ -167,22 +210,36 @@ const Reading = () => {
                             )}
                         </div>
                     ))}
-                    <button onClick={checkAnswer}>Check Answer</button>
-                    <div className="question-results">
-                        <ul>
-                            {results.map((result, index) => (
-                                <li key={index}>
-                                    Question {index + 1}: {result ? 'Correct' : 'Incorrect'}
-                                    Correct answer: {correctAnswers[index + 1]}
-                                </li>
-                            ))}
-                            {results.length > 0 && (
-                                <p className="score">
-                                    Your score: {score} / {results.length}
-                                </p>
-                            )}
-                        </ul>
-                    </div>
+                    {
+                        !showResult && (
+                            <button onClick={checkAnswer}>Check Answer</button>
+                        )
+                    }
+                    {
+                        showResult && (
+                            <div>
+                                <div className="question-results">
+                                    <ul>
+                                        {results.map((result, index) => (
+                                            <li key={index}>
+                                                Question {index + 1}: {result ? 'Correct' : 'Incorrect'}
+                                                Correct answer: {correctAnswers[index + 1]}
+                                            </li>
+                                        ))}
+                                        {results.length > 0 && (
+                                            <p className="score">
+                                                Your score: {score} / {results.length}
+                                            </p>
+                                        )}
+                                    </ul>
+                                </div>
+
+                                <div className="button-container">
+                                    <button onClick={handleRestart}>Restart</button>
+                                </div>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </div>
