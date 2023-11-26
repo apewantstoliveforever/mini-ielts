@@ -6,6 +6,7 @@ import './Reading.css'; // Import the CSS file
 import api from '../api/api';
 import CountdownTimer from '..//components/CountdownTimer/CountdownTimer';
 import { useNavigate } from 'react-router-dom';
+import UserService from "../services/user.service"
 
 const Reading = () => {
     const { id } = useParams();
@@ -85,6 +86,7 @@ const Reading = () => {
             ...selectedAnswers,
             [questionNumber]: e.target.value,
         });
+        console.log("select", selectedAnswers);
     }
 
 
@@ -116,6 +118,7 @@ const Reading = () => {
     }
 
     const handleAnswerChange = (questionNumber, selectedOption) => {
+        console.log("select", selectedAnswers);
         setSelectedAnswers({
             ...selectedAnswers,
             [questionNumber]: selectedOption,
@@ -138,11 +141,6 @@ const Reading = () => {
         });
         setShowResult(true);
         setResults(results);
-        setScore(results.filter((result) => result).length);
-        // navigate('/result') and give results, correctAnswers, score;
-        //save this post link
-        const postLink = `/reading/${id}`;
-        navigate(`/result/${id}`, { state: { results, correctAnswers, score, postLink, selectedAnswers } });
     };
 
     const checkTimeout = () => {
@@ -157,6 +155,36 @@ const Reading = () => {
     useEffect(() => {
         setCorrectAnswers(getCorrectAnswers());
     }, [post]);
+
+    useEffect(() => {
+        if (showResult) {
+                    // setScore(results.filter((result) => result === true).length);
+        const scoreResult = results.filter((result) => result === true).length;
+        // point equal to number of correct answer / total question * 10
+        const point = scoreResult / results.length * 100;
+        // navigate('/result') and give results, correctAnswers, score;
+        //save this post link
+        const postLink = `/reading/${id}`;
+        console.log("postLink", score);
+        //send result to server
+        const dataSend = {
+            id: id,
+            point: point,
+            selectedAnswers: selectedAnswers,
+        }
+        UserService.sendResult(dataSend).then(
+            (response) => {
+                console.log(response);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+
+        navigate(`/result/${id}`, { state: { results, correctAnswers, score, postLink, selectedAnswers } });
+        }
+
+    }, [results]);
 
     return (
         <div className="reading-container">
@@ -205,7 +233,7 @@ const Reading = () => {
                                                 Question {currentQuestion++}
                                             </div>
                                             <Question
-                                                number={questionIndex + 1} // Use questionIndex + 1 as the question number
+                                                number={currentQuestion-1} // Use questionIndex + 1 as the question number
                                                 text={question.question_text}
                                                 options={question.question_options}
                                                 handleAnswerChange={handleAnswerChange}

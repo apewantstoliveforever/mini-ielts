@@ -3,6 +3,8 @@ import './Home.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/api';
+import { useSelector } from "react-redux";
+import UserService from "../services/user.service"
 
 function Home() {
   const api_url = api;
@@ -10,7 +12,8 @@ function Home() {
   const [page, setPage] = useState(1); // Current page
   const [totalPages, setTotalPages] = useState(1); // Total number of pages
   const navigate = useNavigate(); // Use navigate to redirect
-
+  const { user: currentUser } = useSelector((state) => state.auth);
+  console.log(currentUser);
   // Function to fetch manga items for a specific page
   function getPosts(pageNumber) {
     axios.get(`${api_url}/posts/page/${pageNumber}`)
@@ -41,6 +44,17 @@ function Home() {
   const handlePageChange = (newPage) => {
     setPage(newPage);
   };
+  const handleDelete = (id) => {
+    UserService.deletePost(id).then(
+      (response) => {
+        console.log(response);
+        getPosts(page);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
 
   return (
     <div className='home-page'>
@@ -52,11 +66,14 @@ function Home() {
       <div className='manga-list'>
         {posts.length > 0 ? (
           posts.map((item, index) => (
-            <div className='manga-item' key={index} onClick={() => navigate(`/${item.post_type === 'reading' ? 'reading' : 'listen'}/${item.post_id}`)}>
-              <div className='post-img'>
-                <img src={extractImageSrcFromHTML(item.reading_text)} alt='Ảnh bài viết' />
+            <div className='manga-item' key={index}>
+              <div onClick={() => navigate(`/${item.post_type === 'reading' ? 'reading' : 'listen'}/${item.post_id}`)}>
+                <div className='post-img'>
+                  <img src={extractImageSrcFromHTML(item.reading_text)} alt='Ảnh bài viết' />
+                </div>
+                <p>{item.post_title}</p>
               </div>
-              <p>{item.post_title}</p>
+              <button onClick={() => handleDelete(item.post_id)} className='btn btn-primary'>Delete</button>
             </div>
           ))
         ) : (

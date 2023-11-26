@@ -22,11 +22,24 @@ const getAdminBoard = () => {
 const postNewReading = (dataSend) => {
   return axios.post(`${api}/posts`, dataSend, { headers: authHeader() });
 }
+const sendResult = (dataSend) => {
+  return axios.post(`${api}/posts/saveResult`, dataSend, { headers: authHeader() });
+}
+const deletePost = (id) => {
+  return axios.delete(`${api}/posts/${id}`, { headers: authHeader() });
+}
+
+const getUserResults = () => {
+  return axios.get(`${api}/posts/getUserResults`, { headers: authHeader() });
+}
 
 export default {
   getPublicContent,
   getUserBoard,
   getModeratorBoard,
   getAdminBoard,
-  postNewReading
+  postNewReading,
+  deletePost,
+  sendResult,
+  getUserResults
 };

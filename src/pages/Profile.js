@@ -1,20 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Avatar, Card, Typography } from "antd";
 import './Profile.css'
+import UserService from "../services/user.service"
+
 
 const Profile = () => {
     const { user: currentUser } = useSelector((state) => state.auth);
+    const [userResults, setUserResults] = useState([]);
+    const [exercisesCompleted, setExercisesCompleted] = useState(0);
+    const [averageScore, setAverageScore] = useState(0);
 
+    useEffect(() => {
+        UserService.getUserResults().then(
+            (response) => {
+                console.log(response.data);
+                setUserResults(response.data.results);
+                setExercisesCompleted(response.data.results.length);
+                let sum = 0;
+                response.data.results.forEach(result => {
+                    sum += result.point;
+                });
+                setAverageScore(sum / response.data.results.length);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }, []);
+    useEffect(() => {
+        console.log(userResults);
+    }, [userResults]);
     if (!currentUser) {
         return <Navigate to="/login" />;
     }
-
-    const exercisesCompleted = 50;
-    const workoutHistory = ["Exercise 1", "Exercise 2", "Exercise 3"];
-    const averageScore = 85;
-
     return (
         <div className="ProfilePage">
             <Card
@@ -40,11 +60,13 @@ const Profile = () => {
 
                 <div style={{ marginTop: "20px" }}>
                     <Typography.Title level={4}>Workout History</Typography.Title>
-                    <ul>
-                        {workoutHistory.map((exercise, index) => (
-                            <li key={index}>{exercise}</li>
-                        ))}
-                    </ul>
+                    {
+                        userResults.map((result, index) => (
+                            <div key={index}>
+                                <Typography.Paragraph>Exercise {result.post_id}: {result.point}%</Typography.Paragraph>
+                            </div>
+                        ))
+                    }
                 </div>
 
                 <div style={{ marginTop: "20px" }}>

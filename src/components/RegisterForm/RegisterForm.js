@@ -95,7 +95,7 @@ const RegisterForm = ({ onRegister }) => {
               onChange={(e) => setDisplayName(e.target.value)}
             />
 
-            <FormLabel>Profile Photo</FormLabel>
+            <FormLabel> Photo</FormLabel>
             <Form.Group>
               <Form.Control type="file" accept="image/*" onChange={handlePhotoChange} />
             </Form.Group>
