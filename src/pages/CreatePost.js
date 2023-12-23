@@ -3,6 +3,7 @@ import './CreatePost.css'; // Import your CSS file here
 import TextEditor from '../components/TextEditor/TextEditor';
 import axios from 'axios';
 import api from '../api/api';
+import axiosInstance from '../api/axiosInstance';
 
 function CreatePost() {
 
@@ -23,11 +24,16 @@ function CreatePost() {
                     data.append('file', file);
                     setLoading(true);
 
-                    axios.post(`${api}/posts/uploadAudio`, data).then((res) => {
-                        setAudio(res.data.secure_url);
-                        setLoading(false);
-                        console.log(res.data.secure_url);
-                    });
+                    axiosInstance.post('/posts/uploadAudio', data)
+                        .then((res) => {
+                            setAudio(res.data.secure_url);
+                            setLoading(false);
+                            console.log(res.data.secure_url);
+                        })
+                        .catch((error) => {
+                            // Handle errors if needed
+                            console.error('Error:', error);
+                        });
                 } else {
                     alert('File size should be less than 10 MB.');
                 }

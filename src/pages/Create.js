@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import axiosInstance from '../api/axiosInstance';
 import CreateMutipleSection from '../components/Create/CreateMutipleSection';
 import CreateSelectSection from '../components/Create/CreateSelectSection';
 import CreateBlankSection from '../components/Create/CreateBlankSection';
@@ -113,30 +114,27 @@ const Create = () => {
                     // Add JSON data to FormData
                     data.append('post_title', postTitle);
 
-                    axios({
-                        method: 'POST',
-                        url: `${api_url}/posts/uploadAudio`,
-                        data: data, // Attach the FormData object
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                        },
-                    }).then(async (res) => {
-                        //neu status 200 thi upload thanh cong
-                        console.log(res.status);
-                        setListeningLink(res.data.linkId);
-                        if (res.status === 200) {
-                            const dataSend = {
-                                post_title: postTitle,
-                                post_type: postType,
-                                reading_text: readingText,
-                                listening_link: res.data.linkId,
-                                post_sections: sections,
-                            };
-                            const response = await axios.post(`${api_url}/posts`, dataSend);
-                        }
-                    }).catch((error) => {
-                        console.error('Error:', error);
-                    });
+                    // Use axiosInstance for your requests
+                    axiosInstance
+                        .post('/posts/uploadAudio', data)
+                        .then(async (res) => {
+                            console.log(res.status);
+                            setListeningLink(res.data.linkId);
+                            if (res.status === 200) {
+                                const dataSend = {
+                                    post_title: postTitle,
+                                    post_type: postType,
+                                    reading_text: readingText,
+                                    listening_link: res.data.linkId,
+                                    post_sections: sections,
+                                };
+                                // Use axiosInstance for the second request
+                                const response = await axiosInstance.post('/posts', dataSend);
+                            }
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
                 }
 
 

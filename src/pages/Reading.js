@@ -7,6 +7,7 @@ import api from '../api/api';
 import CountdownTimer from '..//components/CountdownTimer/CountdownTimer';
 import { useNavigate } from 'react-router-dom';
 import UserService from "../services/user.service"
+import axiosInstance from '../api/axiosInstance';
 
 const Reading = () => {
     const { id } = useParams();
