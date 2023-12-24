@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Header.css'; // Nhúng tệp CSS của bạn vào đây
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
@@ -21,6 +21,10 @@ function Header() {
     dispatch(logout());
     navigate('/');
   };
+  useEffect(() => {
+    console.log('isLoggedIn:', isLoggedIn);
+  }
+    , [isLoggedIn]);
   return (
     <header>
       <h1>Mini Toeic</h1>
