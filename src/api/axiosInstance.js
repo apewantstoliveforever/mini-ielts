@@ -48,7 +48,7 @@ axiosInstance.interceptors.response.use(
 
       try {
         console.log('Refreshing access token...', getRefreshToken());
-        const refreshResponse = await axios.post('/api/refreshToken', {
+        const refreshResponse = await axios.post('https://api-blog.apewannaliveforever.online/api/refreshToken', {
             refreshToken: getRefreshToken(),
           }, {
             headers: {
