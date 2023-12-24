@@ -7,6 +7,4 @@ const getUserRole = () => {
     return user.role;
 };
 
-export default {
-    getUserRole
-};
+export default getUserRole

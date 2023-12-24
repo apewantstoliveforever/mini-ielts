@@ -10,7 +10,7 @@ function Header() {
   const navigate = useNavigate();
   //get isLoggedIn from store
   const { isLoggedIn } = useSelector(state => state.auth);
-  const { userRole } = useSelector(state => state.auth);
+  const userRole = getUserRole();
   const handleLogout = () => {
     dispatch(logout());
     navigate('/');
