@@ -24,6 +24,7 @@ export const register = (email, password, displayName, photoURL) => (dispatch) =
             return Promise.resolve();
         },
         (error) => {
+            console.log(error);
             const message =
                 (error.response &&
                     error.response.data &&
