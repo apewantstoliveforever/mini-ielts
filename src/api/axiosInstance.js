@@ -48,8 +48,13 @@ axiosInstance.interceptors.response.use(
 
       try {
         const refreshResponse = await axios.post('/api/refreshToken', {
-          refreshToken: getRefreshToken(),
-        });
+            refreshToken: getRefreshToken(),
+          }, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          
         console.log('Refresh response:', refreshResponse);
 
         user = {
