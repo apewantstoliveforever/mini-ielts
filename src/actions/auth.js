@@ -11,10 +11,10 @@ import AuthService from "../services/auth.service";
 
 export const register = (email, password, displayName, photoURL) => (dispatch) => {
     return AuthService.register(email, password, displayName, photoURL).then(
-        (response) => {
+        (data) => {
             dispatch({
                 type: REGISTER_SUCCESS,
-                payload: { user: response.data },
+                payload: { user: data },
             });
 
             // dispatch({
