@@ -29,9 +29,12 @@ const sendResult = (dataSend) => {
   return axiosInstance.post("/posts/saveResult", dataSend, { headers: authHeader() });
 };
 
+// const deletePost = (id) => {
+//   return axiosInstance.delete(`/posts/${id}`, { headers: authHeader() });
+// };
 const deletePost = (id) => {
-  return axiosInstance.delete(`/posts/${id}`, { headers: authHeader() });
-};
+    return axiosInstance.delete(`/posts/${id}`);
+  };
 
 const getUserResults = () => {
   return axiosInstance.get("/posts/getUserResults", { headers: authHeader() });
