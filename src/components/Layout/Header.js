@@ -3,13 +3,19 @@ import './Header.css'; // Nhúng tệp CSS của bạn vào đây
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { login, register, logout } from '../../actions/auth';
-import {getUserRole} from '../../services/user-role'
 
 function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //get isLoggedIn from store
   const { isLoggedIn } = useSelector(state => state.auth);
+  const getUserRole = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      return user.role;
+    }
+    return null;
+  };
   const userRole = getUserRole();
   const handleLogout = () => {
     dispatch(logout());
