@@ -3,6 +3,7 @@ header {
     background-color: #f6a9cd; /* Màu nền của header */
     color: #fff; /* Màu chữ của header */
     padding: 20px; /* Khoảng cách bên trong header */
+    max-width: 100vw;
   }
   
   h1 {
@@ -36,6 +37,13 @@ header {
   @media (max-width: 768px) {
     nav ul li {
       margin-right: 4; /* Loại bỏ khoảng cách bên phải của mục */
-      font-size: 13px;
+      font-size: 10px;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    nav ul li {
+      margin-right: 2; /* Loại bỏ khoảng cách bên phải của mục */
+      font-size: 12px;
     }
   }
