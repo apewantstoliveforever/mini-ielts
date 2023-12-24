@@ -33,3 +33,9 @@ header {
     text-decoration: underline; /* Gạch chân liên kết khi di chuột qua */
   }
   
+  @media (max-width: 768px) {
+    nav ul li {
+      margin-right: 4; /* Loại bỏ khoảng cách bên phải của mục */
+      font-size: 13px;
+    }
+  }

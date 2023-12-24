@@ -1,44 +1,58 @@
 .home-page {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
 /* Home.css */
 .manga-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start; /* Canh giữa mỗi hàng và căn cách giữa các mục */
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  /* Canh giữa mỗi hàng và căn cách giữa các mục */
+}
+
+.manga-item {
+  width: calc(25% - 20px);
+  /* Chiều rộng của mỗi mục (25% của container và trừ 10px để tạo khoảng cách) */
+  min-width: 300px;
+  margin-bottom: 20px;
+  /* Khoảng cách giữa các mục */
+  margin-right: 20px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  /* Đường viền cho mỗi mục */
+  padding: 10px;
+  text-align: center;
+}
+
+.post-img img {
+  max-width: 100%;
+  height: auto;
+}
+
+.post-content {
+  margin-top: 10px;
+}
+
+/* Định dạng tiêu đề và nội dung bài viết */
+.post-content h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.post-content p {
+  font-size: 14px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
   .manga-item {
-    width: calc(25% - 20px); /* Chiều rộng của mỗi mục (25% của container và trừ 10px để tạo khoảng cách) */
-    margin-bottom: 20px; /* Khoảng cách giữa các mục */
-    margin-right: 20px;
-    box-sizing: border-box;
-    border: 1px solid #ddd; /* Đường viền cho mỗi mục */
-    padding: 10px;
-    text-align: center;
+    width: calc(50% - 20px);
+    /* Thay đổi chiều rộng thành 50% cho màn hình nhỏ hơn */
+    margin-right: 0;
+    /* Remove the right margin to ensure that two items fit in one row */
   }
-  
-  .post-img img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .post-content {
-    margin-top: 10px;
-  }
-  
-  /* Định dạng tiêu đề và nội dung bài viết */
-  .post-content h3 {
-    font-size: 18px;
-    margin: 0;
-  }
-  
-  .post-content p {
-    font-size: 14px;
-    margin: 0;
-  }
-  
+}

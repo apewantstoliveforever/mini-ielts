@@ -12,10 +12,13 @@
 }
 
 .manga-item {
-  width: calc(25% - 20px); /* 25% width with 20px margin */
-  margin-bottom: 20px;
+  width: calc(25% - 20px); /* Chiều rộng của mỗi mục (25% của container và trừ 10px để tạo khoảng cách) */
+  min-width: 300px; 
+  margin: 0 20px 20px 0; /* Khoảng cách giữa các mục */
+  margin-bottom: 20px; /* Khoảng cách giữa các mục */
+  margin-right: 20px;
   box-sizing: border-box;
-  border: 1px solid #ddd;
+  border: 1px solid #ddd; /* Đường viền cho mỗi mục */
   padding: 10px;
   text-align: center;
 }
@@ -40,3 +43,11 @@
     margin: 0;
   }
   
+  @media (max-width: 768px) {
+    .manga-item {
+      width: calc(50% - 20px);
+      /* Thay đổi chiều rộng thành 50% cho màn hình nhỏ hơn */
+      margin-right: 0;
+      /* Remove the right margin to ensure that two items fit in one row */
+    }
+  }

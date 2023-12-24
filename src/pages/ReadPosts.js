@@ -3,6 +3,7 @@ import './ReadPosts.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/api';
+import UserService from "../services/user.service"
 
 function ReadPosts() {
   const api_url = api;
@@ -33,7 +34,25 @@ function ReadPosts() {
 
     return src;
   }
-
+  const getUserRole = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      return user.role;
+    }
+    return null;
+  };
+  const userRole = getUserRole();
+  const handleDelete = (id) => {
+    UserService.deletePost(id).then(
+      (response) => {
+        console.log(response);
+        getPosts(page);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
   useEffect(() => {
     getPosts(page);
   }, [page]);
@@ -44,7 +63,6 @@ function ReadPosts() {
 
   return (
     <div className='home-page'>
-      <h2>Welcome to My Reading Posts</h2>
       <div className="pagination">
         <button
           onClick={() => handlePageChange(page - 1)}
@@ -68,6 +86,9 @@ function ReadPosts() {
                 <img src={extractImageSrcFromHTML(item.reading_text)} alt='Ảnh bài viết' />
               </div>
               <p>{item.post_title}</p>
+              {userRole === 'admin' &&
+                <button onClick={() => handleDelete(item.post_id)} className='btn btn-primary'>Delete</button>
+              }
             </div>
           ))
         ) : (

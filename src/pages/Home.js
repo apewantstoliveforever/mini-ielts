@@ -14,6 +14,14 @@ function Home() {
   const navigate = useNavigate(); // Use navigate to redirect
   const { user: currentUser } = useSelector((state) => state.auth);
   console.log(currentUser);
+  const getUserRole = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      return user.role;
+    }
+    return null;
+  };
+  const userRole = getUserRole();
   // Function to fetch manga items for a specific page
   function getPosts(pageNumber) {
     axios.get(`${api_url}/posts/page/${pageNumber}`)
@@ -73,7 +81,9 @@ function Home() {
                 </div>
                 <p>{item.post_title}</p>
               </div>
-              <button onClick={() => handleDelete(item.post_id)} className='btn btn-primary'>Delete</button>
+              {userRole === 'admin' &&
+                <button onClick={() => handleDelete(item.post_id)} className='btn btn-primary'>Delete</button>
+              }
             </div>
           ))
         ) : (

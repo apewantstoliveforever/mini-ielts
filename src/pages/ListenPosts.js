@@ -3,6 +3,7 @@ import './ListenPosts.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/api';
+import UserService from "../services/user.service"
 
 function ListenPosts() {
   const api_url = api;
@@ -34,6 +35,25 @@ function ListenPosts() {
     return src;
   }
 
+  const getUserRole = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      return user.role;
+    }
+    return null;
+  };
+  const userRole = getUserRole();
+  const handleDelete = (id) => {
+    UserService.deletePost(id).then(
+      (response) => {
+        console.log(response);
+        getPosts(page);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
 
   useEffect(() => {
     getPosts(page);
@@ -45,7 +65,6 @@ function ListenPosts() {
 
   return (
     <div className='home-page'>
-      <h2>Listen Posts</h2>
       <div className="pagination">
         <button
           onClick={() => handlePageChange(page - 1)}
@@ -69,6 +88,9 @@ function ListenPosts() {
                 <img src={extractImageSrcFromHTML(item.reading_text)} alt='Ảnh bài viết' />
               </div>
               <p>{item.post_title}</p>
+              {userRole === 'admin' &&
+                <button onClick={() => handleDelete(item.post_id)} className='btn btn-primary'>Delete</button>
+              }
             </div>
           ))
         ) : (
