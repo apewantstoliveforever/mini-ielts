@@ -53,10 +53,11 @@ axiosInstance.interceptors.response.use(
 
         user = {
           ...user,
-          token: refreshResponse.data.accessToken,
+          token: refreshResponse.data.token,
         };
         localStorage.setItem('user', JSON.stringify(user));
-
+        console.log('Access token refreshed!');
+        console.log('New token:', refreshResponse.data.token);
         //originalRequest.headers['x-access-token'] = refreshResponse.data.accessToken;
         originalRequest.headers['x-access-token'] = user.token;
         return axiosInstance(originalRequest);
