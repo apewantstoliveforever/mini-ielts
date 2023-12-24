@@ -14,12 +14,13 @@ export const register = (email, password, displayName, photoURL) => (dispatch) =
         (response) => {
             dispatch({
                 type: REGISTER_SUCCESS,
+                payload: { user: response.data },
             });
 
-            dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
-            });
+            // dispatch({
+            //     type: SET_MESSAGE,
+            //     payload: response.data.message,
+            // });
 
             return Promise.resolve();
         },
