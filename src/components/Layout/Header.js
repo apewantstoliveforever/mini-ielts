@@ -3,6 +3,7 @@ import './Header.css'; // Nhúng tệp CSS của bạn vào đây
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { login, register, logout } from '../../actions/auth';
+import {getUserRole} from '../../services/user-role'
 
 function Header() {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function Header() {
           {isLoggedIn && (
             <li><a href="/profile">Profile</a></li>
           )}
-          {isLoggedIn && (
+          {isLoggedIn && getUserRole === 'admin' && (
             <li><a href="/create">Create</a></li>
 
           )}
