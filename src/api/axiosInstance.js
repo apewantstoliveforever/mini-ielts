@@ -1,5 +1,5 @@
 import axios from 'axios';
-import authHeader from "./auth-header";
+import authHeader from '../services/auth-header';
 
 
 let user = JSON.parse(localStorage.getItem('user'));
