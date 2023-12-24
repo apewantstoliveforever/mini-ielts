@@ -12,7 +12,9 @@ const initialState = user
     ? { isLoggedIn: true, user }
     : { isLoggedIn: false, user: null };
 
-export default function (state = initialState, action) {
+const role = user.role;
+
+export default function (state = initialState, userRole = role, action) {
     const { type, payload } = action;
 
     switch (type) {
