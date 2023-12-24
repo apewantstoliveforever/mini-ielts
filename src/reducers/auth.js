@@ -20,6 +20,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 isLoggedIn: false,
+                user: payload ? payload.user : null,
             };
         case REGISTER_FAIL:
             return {
