@@ -16,6 +16,7 @@ import Authenticate from './pages/Authenticate';
 import './App.css';
 import Profile from './pages/Profile';
 import ResultPage from './pages/ResultPage';
+import Traffic from './pages/Traffic';
 function App() {
   return (
     <Router>
@@ -34,6 +35,7 @@ function App() {
           <Route path= "/profile" element={<Profile />} />
           <Route path="/login" element={<Authenticate />} />
           <Route path="/result/:id" element={<ResultPage />} />
+          <Route path="/traffic" element={<Traffic />} />
         </Routes>
         <Footer />
       </div>
