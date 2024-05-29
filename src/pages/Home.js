@@ -6,6 +6,7 @@ import api from '../api/api';
 import { useSelector } from "react-redux";
 import UserService from "../services/user.service"
 
+
 function Home() {
   const api_url = api;
   const [posts, setPosts] = useState([]);
@@ -46,8 +47,8 @@ function Home() {
   }
 
   useEffect(() => {
-    getPosts(page);
-  }, [page]);
+    console.log(import.meta.env.REACT_APP_API_URL);
+  },[]);
 
   const handlePageChange = (newPage) => {
     setPage(newPage);
